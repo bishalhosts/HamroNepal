@@ -1,0 +1,387 @@
+:root {
+  --paper: #f7f8fb;
+  --surface: #ffffff;
+  --ink: #14213d;
+  --muted: #66708a;
+  --line: #e1e5ee;
+  --blue: #003893;
+  --crimson: #c8102e;
+  --today-text: #ffffff;
+  --faded: #aab1c3;
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+html, 
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Mukta", "Noto Sans Devanagari", system-ui, sans-serif;
+  line-height: 1.4;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 16px 10px 32px;
+}
+#calendar-app { width: 100%; display: flex; justify-content: center; padding: 16px 10px 32px; }
+#calendar-app .patro { width: 100%; max-width: 560px; }
+
+/* Header */
+.bar {
+  display: grid;
+  grid-template-columns: 48px 1fr 48px;
+  align-items: center;
+  gap: 8px;
+}
+.title { text-align: center; }
+#calendar-app h1 {
+  font-family: "Yatra One", "Mukta", sans-serif;
+  font-weight: 400;
+  font-size: clamp(1.7rem, 7vw, 2.4rem);
+  line-height: 1.15;
+  margin: 0;
+  color: var(--blue);
+}
+.sub { margin: 2px 0 0; color: var(--muted); font-size: 0.95rem; }
+.nav {
+  width: 48px; height: 48px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  border-radius: 50%;
+  font-size: 1.7rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.nav:hover:not(:disabled) { border-color: var(--blue); color: var(--blue); }
+.nav:disabled { opacity: 0.35; cursor: not-allowed; }
+:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+
+.tools { display: flex; justify-content: center; margin: 10px 0 14px; }
+.today-btn {
+  font: inherit; font-weight: 600;
+  padding: 6px 22px;
+  border: 1px solid var(--blue);
+  background: transparent;
+  color: var(--blue);
+  border-radius: 999px;
+  cursor: pointer;
+}
+.today-btn:hover { background: var(--blue); color: var(--today-text); }
+
+/* Calendar */
+.weekdays, .grid { display: grid; grid-template-columns: repeat(7, 1fr); }
+.weekdays div {
+  text-align: center;
+  font-weight: 700;
+  font-size: clamp(0.78rem, 3.2vw, 0.95rem);
+  padding: 8px 0;
+  color: var(--muted);
+}
+.weekdays div:last-child { color: var(--crimson); }
+
+.grid {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.cell {
+  position: relative;
+  min-height: clamp(58px, 15vw, 82px);
+  padding: 4px 2px;
+  border: 0;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 2px;
+  cursor: pointer;
+}
+.cell:nth-child(7n) { border-right: 0; color: var(--crimson); }
+.cell.empty { cursor: default; background: transparent; }
+.cell.empty.sat, .cell.empty:nth-child(7n) { color: inherit; }
+.cell:not(.empty):hover { background: color-mix(in srgb, var(--blue) 8%, transparent); }
+.np {
+  font-size: clamp(1.15rem, 5.6vw, 1.6rem);
+  font-weight: 600;
+  width: 2.1em; height: 2.1em;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  line-height: 1;
+}
+.en { font-size: clamp(0.66rem, 2.7vw, 0.8rem); color: var(--muted); line-height: 1; }
+.cell:nth-child(7n) .en { color: color-mix(in srgb, var(--crimson) 70%, var(--muted)); }
+.en.first { font-weight: 700; color: var(--ink); }
+
+.cell.today .np { background: var(--blue); color: var(--today-text); }
+.cell.selected { box-shadow: inset 0 0 0 2px var(--blue); }
+
+/* Detail panel */
+.detail {
+  margin-top: 16px;
+  padding: 14px 16px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--blue);
+  border-radius: 10px;
+}
+.detail .d-np { font-size: 1.35rem; font-weight: 700; margin: 0; }
+.detail .d-en { margin: 2px 0 0; color: var(--muted); }
+.detail .d-tag {
+  display: inline-block; margin-top: 8px;
+  font-size: 0.85rem; font-weight: 600;
+  color: var(--blue);
+}
+.detail.sat { border-left-color: var(--crimson); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .cell, .nav, .today-btn { transition: background-color .15s, color .15s, border-color .15s; }
+}
+
+
+/* Nepal Atlas styles */
+:root {
+  --paper: #f3f6fb;
+  --surface: #ffffff;
+  --ink: #12203d;
+  --muted: #5c6884;
+  --line: #d9e0ee;
+  --blue: #003893;
+  --crimson: #c8102e;
+
+  --c1: #9fc5e8;
+  --c2: #f2c38d;
+  --c3: #b5d6a7;
+  --c4: #d5b3e0;
+  --c5: #f0a9a0;
+  --c6: #a6d8d0;
+  --c7: #f0dc8a;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Mukta", system-ui, sans-serif;
+  line-height: 1.5;
+}
+a { color: var(--blue); }
+:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Header */
+.site-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 14px clamp(16px, 4vw, 48px);
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+  position: sticky; top: 0; z-index: 10;
+}
+.brand { font-family: "Yatra One", "Mukta", sans-serif; font-size: 1.5rem; color: var(--blue); text-decoration: none; }
+.brand span { font-family: "Mukta", sans-serif; font-size: 1rem; color: var(--muted); margin-left: 6px; }
+.site-header nav a { margin-left: 20px; text-decoration: none; font-weight: 600; color: var(--ink); }
+.site-header nav a:hover { color: var(--crimson); }
+
+/* Hero */
+.hero { text-align: center; padding: clamp(32px, 7vw, 72px) 16px 8px; }
+.hero h1 {
+  font-family: "Yatra One", "Mukta", sans-serif; font-weight: 400;
+  font-size: clamp(2.2rem, 7vw, 4rem); line-height: 1.1; margin: 0 0 12px; color: var(--blue);
+}
+.hero p { margin: 0 auto; max-width: 46ch; color: var(--muted); font-size: 1.1rem; }
+
+/* Map */
+.map-section { max-width: 1100px; margin: 0 auto; padding: 16px clamp(8px, 3vw, 32px) 40px; }
+.map-wrap { position: relative; }
+#nepal-map { width: 100%; height: auto; display: block; }
+
+.province {
+  stroke: #fff; stroke-width: 1.5; stroke-linejoin: round;
+  cursor: pointer; outline: none;
+  transition: filter .15s;
+}
+.p1 { fill: var(--c1); } .p2 { fill: var(--c2); } .p3 { fill: var(--c3); } .p4 { fill: var(--c4); }
+.p5 { fill: var(--c5); } .p6 { fill: var(--c6); } .p7 { fill: var(--c7); }
+.province:hover, .province:focus-visible { filter: brightness(0.93) saturate(1.15); }
+
+.outline { fill: none; pointer-events: none; stroke-linejoin: round; visibility: hidden; }
+.outline.hover { stroke: var(--blue); stroke-width: 2.5; }
+.outline.selected { stroke: var(--crimson); stroke-width: 4; }
+.outline.show { visibility: visible; }
+
+.badge { pointer-events: none; }
+.badge circle { fill: var(--ink); opacity: .85; }
+.badge-num { fill: #fff; font: 700 19px "Mukta", sans-serif; text-anchor: middle; dominant-baseline: central; }
+
+.tooltip {
+  position: absolute; pointer-events: none; z-index: 5;
+  background: var(--ink); color: #fff; font-weight: 600;
+  padding: 4px 10px; border-radius: 6px; font-size: .95rem;
+  transform: translate(-50%, -140%); white-space: nowrap;
+}
+
+/* Legend */
+.legend { list-style: none; margin: 20px 0 0; padding: 0; display: grid; gap: 8px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+.legend button {
+  width: 100%; display: flex; align-items: center; gap: 10px;
+  font: inherit; font-weight: 600; color: var(--ink); text-align: left;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 8px;
+  padding: 8px 12px; cursor: pointer;
+}
+.legend button:hover, .legend button.active { border-color: var(--crimson); }
+.legend button.active { box-shadow: inset 4px 0 0 var(--crimson); }
+.swatch { width: 14px; height: 14px; border-radius: 50%; flex: none; }
+.legend small { display: block; color: var(--muted); font-weight: 400; line-height: 1.1; }
+
+/* Details (next section) */
+.province-details { background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); scroll-margin-top: 64px; }
+.details-inner { max-width: 900px; margin: 0 auto; padding: clamp(28px, 6vw, 64px) clamp(16px, 4vw, 32px); }
+.details-kicker { margin: 0; color: var(--crimson); font-weight: 700; }
+.details-inner h2 { font-family: "Yatra One", "Mukta", sans-serif; font-weight: 400; font-size: clamp(2rem, 6vw, 3rem); margin: 4px 0 0; color: var(--blue); }
+.details-np { margin: 0 0 20px; font-size: 1.4rem; color: var(--muted); }
+.facts { margin: 0 0 24px; }
+.facts div { display: flex; gap: 12px; padding: 8px 0; border-top: 1px solid var(--line); }
+.facts dt { width: 110px; color: var(--muted); }
+.facts dd { margin: 0; font-weight: 600; }
+.placeholder { padding: 28px; border: 2px dashed var(--line); border-radius: 10px; color: var(--muted); text-align: center; }
+
+.site-footer { text-align: center; padding: 24px 16px 36px; color: var(--muted); font-size: .9rem; }
+
+@media (max-width: 520px) {
+  .brand span { display: none; }
+  .badge-num { font-size: 22px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .province { transition: none; }
+}
+
+/* Nepal live clock */
+#nepal-live-time {
+  border-radius: 12px;
+  position: fixed; bottom: 16px; right: 16px; z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 10px 16px;
+  background: var(--ink);
+  color: #fff;
+  font-family: "Mukta", system-ui, sans-serif;
+}
+#nepal-live-time .time-label { font-weight: 700; }
+#nepal-live-time time { font-size: 1.35rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+#nepal-live-time .time-zone { opacity: .8; font-size: .9rem; }
+
+/* District explorer and regional links */
+.district-explorer, .regional-links { margin-top: 34px; }
+.section-heading { display:flex; align-items:end; justify-content:space-between; gap:16px; margin-bottom:14px; }
+.section-heading h3 { margin:2px 0 0; font-size:1.55rem; color:var(--ink); }
+.small-note, .data-note { color:var(--muted); font-size:.9rem; }
+.district-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(145px,1fr)); gap:9px; }
+.district-choice { display:flex; flex-direction:column; align-items:flex-start; gap:2px; padding:10px 12px; border:1px solid var(--line); border-radius:9px; background:var(--paper); color:var(--ink); font:inherit; font-weight:700; cursor:pointer; text-align:left; }
+.district-choice small { color:var(--muted); font-weight:400; }
+.district-choice:hover, .district-choice.active { border-color:var(--crimson); background:color-mix(in srgb,var(--crimson) 6%,var(--surface)); }
+.district-profile { margin-top:18px; padding:20px; border:1px solid var(--line); border-radius:12px; background:var(--paper); }
+.profile-top { display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap; }
+.profile-top h3 { margin:0; color:var(--blue); font-size:1.8rem; }
+.profile-top .details-np { margin:0 0 10px; }
+.outline-link { display:inline-flex; align-items:center; padding:8px 12px; border:1px solid var(--blue); border-radius:8px; text-decoration:none; font-weight:700; white-space:nowrap; }
+.outline-link:hover { background:var(--blue); color:white; }
+.district-facts { margin:10px 0 0; }
+.district-facts dt { width:140px; }
+.data-note { margin:10px 0 0; }
+.link-columns { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+.link-panel { border:1px solid var(--line); border-radius:12px; padding:16px; background:var(--paper); min-height:130px; }
+.link-panel h4 { margin:0 0 10px; font-size:1.1rem; }
+.saved-links { display:grid; gap:8px; }
+.saved-link { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:8px 10px; background:var(--surface); border:1px solid var(--line); border-radius:8px; text-decoration:none; font-weight:600; }
+.saved-link:hover { border-color:var(--blue); }
+.empty-links { color:var(--muted); font-size:.95rem; margin:0; }
+.link-manager { margin-top:16px; border:1px solid var(--line); border-radius:10px; background:var(--surface); }
+.link-manager summary { cursor:pointer; padding:12px 14px; font-weight:700; }
+.link-form { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; padding:4px 14px 14px; }
+.link-form label { display:grid; gap:5px; font-size:.92rem; font-weight:600; }
+.link-form input, .link-form select { width:100%; min-width:0; padding:9px 10px; border:1px solid var(--line); border-radius:7px; background:var(--paper); color:var(--ink); font:inherit; }
+.add-link-btn { align-self:end; padding:10px 16px; border:0; border-radius:8px; background:var(--blue); color:#fff; font:inherit; font-weight:700; cursor:pointer; }
+.link-form .data-note { grid-column:1/-1; margin:0; }
+@media(max-width:620px) { .link-columns { grid-template-columns:1fr; } .section-heading { align-items:flex-start; flex-direction:column; gap:2px; } .link-form { grid-template-columns:1fr; } }
+/* Keep the combined calendar and atlas in a vertical page flow. */
+body { display: block; padding: 0; }
+
+
+/* Professional two-column atlas layout and user-controlled themes */
+:root { color-scheme: light; }
+:root[data-theme="dark"] {
+  --paper:#101827; --surface:#182338; --ink:#edf2fb; --muted:#a8b4ca;
+  --line:#31405a; --blue:#8bb4ff; --crimson:#ff8294; --today-text:#101827;
+  --faded:#586780; color-scheme:dark;
+}
+body { display:block; padding:0; }
+.site-header nav { display:flex; align-items:center; gap:18px; }
+.site-header nav a { margin:0; }
+.theme-toggle { border:1px solid var(--line); border-radius:999px; padding:7px 12px; background:var(--paper); color:var(--ink); font:inherit; font-weight:700; cursor:pointer; }
+.atlas-layout { max-width:1440px; margin:0 auto; padding:0 clamp(12px,3vw,36px) 32px; display:grid; grid-template-columns:minmax(0,1fr) 330px; gap:26px; align-items:start; }
+.atlas-main { min-width:0; }
+.map-section { max-width:none; padding:16px 0 36px; }
+.calendar-sidebar { position:sticky; top:82px; margin-top:20px; min-width:0; background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:14px; box-shadow:0 12px 32px rgba(20,33,61,.08); }
+.calendar-sidebar-heading { display:flex; align-items:baseline; justify-content:space-between; gap:8px; margin:0 0 10px; }
+.calendar-sidebar-heading h2 { margin:0; color:var(--blue); font-size:1.35rem; }
+.calendar-sidebar-heading span { color:var(--muted); font-size:.8rem; }
+#calendar-app { display:block; width:100%; padding:0; }
+#calendar-app .patro { max-width:none; width:100%; }
+#calendar-app .bar { grid-template-columns:34px 1fr 34px; gap:4px; }
+#calendar-app .nav { width:34px; height:34px; }
+#calendar-app .title h1 { font-size:1.25rem; }
+#calendar-app .sub { font-size:.78rem; }
+#calendar-app .tools { margin:7px 0; }
+#calendar-app .today-btn { padding:4px 10px; }
+#calendar-app .weekdays { font-size:.76rem; }
+#calendar-app .grid { gap:2px; }
+#calendar-app .cell { min-height:48px; padding:2px 0; }
+#calendar-app .np { font-size:1rem; width:1.8em; height:1.8em; }
+#calendar-app .en { font-size:.65rem; }
+#calendar-app .detail { margin-top:9px; padding:9px 10px; }
+#calendar-app .detail .d-np { font-size:1.05rem; }
+#calendar-app .detail .d-en { font-size:.8rem; }
+.calendar-expand { width:100%; margin-top:10px; border:1px solid var(--line); border-radius:9px; padding:8px 12px; background:var(--paper); color:var(--ink); font:inherit; font-weight:700; cursor:pointer; }
+.calendar-sidebar.is-expanded { width:min(440px, calc(100vw - 24px)); }
+.calendar-sidebar.is-expanded #calendar-app .cell { min-height:62px; }
+.calendar-sidebar.is-expanded #calendar-app .np { font-size:1.35rem; }
+.calendar-sidebar.is-expanded #calendar-app .en { font-size:.78rem; }
+.province-details { border-radius:16px; margin:0 clamp(12px,3vw,36px) 24px; }
+.district-hover-card { margin-top:12px; padding:12px; border:1px solid var(--line); border-radius:12px; background:var(--paper); display:grid; grid-template-columns:88px minmax(0,1fr); gap:12px; align-items:center; }
+.district-hover-card[hidden] { display:none; }
+.district-hover-card svg { width:88px; height:88px; display:block; color:var(--blue); background:var(--surface); border:1px solid var(--line); border-radius:10px; }
+.district-hover-card h4 { margin:0 0 3px; font-size:1.05rem; }
+.district-hover-card p { margin:0; color:var(--muted); font-size:.86rem; }
+.district-hover-links { grid-column:1/-1; display:flex; flex-wrap:wrap; gap:8px; }
+.district-hover-links a { font-size:.85rem; font-weight:700; padding:5px 9px; border:1px solid var(--line); border-radius:999px; background:var(--surface); text-decoration:none; }
+.district-choice:focus-visible { outline:3px solid var(--blue); outline-offset:2px; }
+:root[data-theme="dark"] #nepal-live-time { background:#080e19; }
+:root[data-theme="dark"] .province { stroke:#182338; }
+@media(max-width:900px) {
+  .atlas-layout { grid-template-columns:minmax(0,1fr) 290px; gap:14px; }
+  .calendar-sidebar { top:76px; }
+}
+@media(max-width:700px) {
+  .atlas-layout { display:flex; flex-direction:column; }
+  .atlas-main { width:100%; }
+  .calendar-sidebar { position:static; order:-1; width:100%; margin-top:12px; }
+  .calendar-sidebar.is-expanded { width:100%; }
+  .province-details { margin-left:12px; margin-right:12px; }
+}
+@media(max-width:520px) {
+  .site-header { align-items:flex-start; gap:10px; flex-wrap:wrap; }
+  .site-header nav { gap:10px; flex-wrap:wrap; font-size:.9rem; }
+  .theme-toggle { padding:5px 9px; }
+}
+
+.atlas-layout:has(.calendar-sidebar.is-expanded) { grid-template-columns:minmax(0,1fr) 440px; }
+@media(max-width:700px) { .atlas-layout:has(.calendar-sidebar.is-expanded) { display:flex; } }
