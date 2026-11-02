@@ -1,0 +1,205 @@
+/* Calendar styles separated from the original stylesheet.
+   style.css is retained unchanged for backward compatibility. */
+#calendar-app {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 16px 10px 32px;
+}
+#calendar-app .patro {
+  width: 100%;
+  max-width: 560px;
+}
+
+/* Header */
+.bar {
+  display: grid;
+  grid-template-columns: 48px 1fr 48px;
+  align-items: center;
+  gap: 8px;
+}
+.title {
+  text-align: center;
+}
+#calendar-app h1 {
+  font-family: "Yatra One", "Mukta", sans-serif;
+  font-weight: 400;
+  font-size: clamp(1.7rem, 7vw, 2.4rem);
+  line-height: 1.15;
+  margin: 0;
+  color: var(--blue);
+}
+.sub {
+  margin: 2px 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+.nav {
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  border-radius: 50%;
+  font-size: 1.7rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.nav:hover:not(:disabled) {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+.nav:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 2px;
+}
+
+.tools {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0 14px;
+}
+.today-btn {
+  font: inherit;
+  font-weight: 600;
+  padding: 6px 22px;
+  border: 1px solid var(--blue);
+  background: transparent;
+  color: var(--blue);
+  border-radius: 999px;
+  cursor: pointer;
+}
+.today-btn:hover {
+  background: var(--blue);
+  color: var(--today-text);
+}
+
+/* Calendar */
+.weekdays,
+.grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+.weekdays div {
+  text-align: center;
+  font-weight: 700;
+  font-size: clamp(0.78rem, 3.2vw, 0.95rem);
+  padding: 8px 0;
+  color: var(--muted);
+}
+.weekdays div:last-child {
+  color: var(--crimson);
+}
+
+.grid {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.cell {
+  position: relative;
+  min-height: clamp(58px, 15vw, 82px);
+  padding: 4px 2px;
+  border: 0;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  cursor: pointer;
+}
+.cell:nth-child(7n) {
+  border-right: 0;
+  color: var(--crimson);
+}
+.cell.empty {
+  cursor: default;
+  background: transparent;
+}
+.cell.empty.sat,
+.cell.empty:nth-child(7n) {
+  color: inherit;
+}
+.cell:not(.empty):hover {
+  background: color-mix(in srgb, var(--blue) 8%, transparent);
+}
+.np {
+  font-size: clamp(1.15rem, 5.6vw, 1.6rem);
+  font-weight: 600;
+  width: 2.1em;
+  height: 2.1em;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  line-height: 1;
+}
+.en {
+  font-size: clamp(0.66rem, 2.7vw, 0.8rem);
+  color: var(--muted);
+  line-height: 1;
+}
+.cell:nth-child(7n) .en {
+  color: color-mix(in srgb, var(--crimson) 70%, var(--muted));
+}
+.en.first {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.cell.today .np {
+  background: var(--blue);
+  color: var(--today-text);
+}
+.cell.selected {
+  box-shadow: inset 0 0 0 2px var(--blue);
+}
+
+/* Detail panel */
+.detail {
+  margin-top: 16px;
+  padding: 14px 16px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--blue);
+  border-radius: 10px;
+}
+.detail .d-np {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin: 0;
+}
+.detail .d-en {
+  margin: 2px 0 0;
+  color: var(--muted);
+}
+.detail .d-tag {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--blue);
+}
+.detail.sat {
+  border-left-color: var(--crimson);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .cell,
+  .nav,
+  .today-btn {
+    transition:
+      background-color 0.15s,
+      color 0.15s,
+      border-color 0.15s;
+  }
+}

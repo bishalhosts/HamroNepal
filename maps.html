@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Explore Nepal's province and district maps, then find district news and local websites."
+    />
+    <title>Nepal Districts, Maps &amp; Local News</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="province/province-page.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="atlas-page-header">
+      <a class="atlas-page-brand" href="index.html"
+        >हाम्रोपात्रो <span>Nepal Atlas</span></a
+      >
+      <nav aria-label="Main navigation">
+        <a href="index.html#map">Interactive map</a>
+      </nav>
+    </header>
+    <main id="main-content" class="map-library">
+      <p class="eyebrow">MAP LIBRARY</p>
+      <h1>Maps of Nepal</h1>
+      <p class="map-library-intro">
+        Explore national and province maps. Open a district page to find local
+        information and search news coverage from popular Nepali outlets.
+      </p>
+
+      <section class="map-library-section" aria-labelledby="national-maps">
+        <h2 id="national-maps">National maps</h2>
+        <div class="map-library-grid">
+          <figure class="map-library-card">
+            <img
+              src="nepal-provinces.svg"
+              alt="Map showing Nepal's seven provinces"
+              loading="lazy"
+            />
+            <figcaption>
+              <h3>Seven provinces</h3>
+              <p>Province boundaries and province numbers.</p>
+              <a href="index.html#map">Explore provinces interactively</a>
+            </figcaption>
+          </figure>
+          <figure class="map-library-card">
+            <img
+              src="nepal-districts.svg"
+              alt="Map showing all 77 districts, grouped by province"
+              loading="lazy"
+            />
+            <figcaption>
+              <h3>All 77 districts</h3>
+              <p>District boundaries, coloured by province.</p>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="map-library-section" aria-labelledby="province-maps">
+        <h2 id="province-maps">Province maps</h2>
+        <div class="province-map-grid">
+          <a class="province-map-card" href="province/koshi.html">
+            <img src="provinces/province-1-koshi.svg" alt="" loading="lazy" />
+            <span>Koshi</span>
+          </a>
+          <a class="province-map-card" href="province/madhesh.html">
+            <img src="provinces/province-2-madhesh.svg" alt="" loading="lazy" />
+            <span>Madhesh</span>
+          </a>
+          <a class="province-map-card" href="province/bagmati.html">
+            <img src="provinces/province-3-bagmati.svg" alt="" loading="lazy" />
+            <span>Bagmati</span>
+          </a>
+          <a class="province-map-card" href="province/gandaki.html">
+            <img src="provinces/province-4-gandaki.svg" alt="" loading="lazy" />
+            <span>Gandaki</span>
+          </a>
+          <a class="province-map-card" href="province/lumbini.html">
+            <img src="provinces/province-5-lumbini.svg" alt="" loading="lazy" />
+            <span>Lumbini</span>
+          </a>
+          <a class="province-map-card" href="province/karnali.html">
+            <img src="provinces/province-6-karnali.svg" alt="" loading="lazy" />
+            <span>Karnali</span>
+          </a>
+          <a class="province-map-card" href="province/sudurpashchim.html">
+            <img
+              src="provinces/province-7-sudurpashchim.svg"
+              alt=""
+              loading="lazy"
+            />
+            <span>Sudurpashchim</span>
+          </a>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <p>
+        Map boundaries are simplified for display and are not for surveying or
+        legal use.
+      </p>
+      <p><a href="index.html">← Back to Nepal Atlas</a></p>
+    </footer>
+    <script src="site-shell.js"></script>
+  </body>
+</html>
