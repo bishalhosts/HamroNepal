@@ -35,31 +35,25 @@ Notes
   beside the profile on desktop; on tablet and mobile, the news panel moves
   above the district details so it is easy to find.
 
-Adding district news and resource links
+Adding district news and Facebook links
 =======================================
 1. Open District/district-links.js in the project folder.
 2. Find the link examples near the top of the file.
-3. Add a line for the district slug, using one of these categories:
-   - facebook: Facebook pages
-   - websites: official websites
-   - news: news websites
-   - other: other useful resources
-4. For example, to add a news link and Facebook page for Kathmandu:
+3. Add links to the district's news list. Links on facebook.com (including
+   subdomains) are automatically shown under Facebook pages; all other
+   websites, including .com domains, are shown under News websites.
+4. For example, to add a news site and Facebook page for Kathmandu:
    districtLinks.kathmandu.news.push({
      label: "Kathmandu News",
      url: "https://example.com/kathmandu-news",
    });
-   districtLinks.kathmandu.facebook.push({
+   districtLinks.kathmandu.news.push({
      label: "Kathmandu Facebook page",
      url: "https://www.facebook.com/your-page",
    });
-   districtLinks.kathmandu.websites.push({
-     label: "Kathmandu official website",
-     url: "https://example.com",
-   });
 5. Replace the sample labels and URLs with the real public page details.
-   Repeat the line to add more links; each district can have multiple links in
-   every category. Use the district's page filename without ".html" as its
-   slug (for example, District/kathmandu.html uses "kathmandu").
+   Repeat the line to add more links. Use the district's page filename
+   without ".html" as its slug (for example,
+   District/kathmandu.html uses "kathmandu").
 6. Save the file and reload the district page to confirm the links appear.
    Do not add these links to the district HTML page.

@@ -93,14 +93,14 @@ img {
 }
 .district-overview-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(260px, 320px);
+  grid-template-columns: minmax(0, 1.35fr) minmax(420px, 1fr);
   align-items: start;
   gap: clamp(16px, 2.5vw, 32px);
   margin-top: 20px;
 }
 .district-overview-content {
   display: grid;
-  grid-template-columns: minmax(220px, 0.65fr) minmax(0, 1.35fr);
+  grid-template-columns: minmax(190px, 0.55fr) minmax(0, 1fr);
   align-items: start;
   gap: 16px;
   min-width: 0;
@@ -114,20 +114,23 @@ img {
   padding: 12px;
 }
 .district-overview-content .district-boundary-map img {
-  max-height: 220px;
+  max-height: 180px;
 }
 .district-overview-content .district-facts-panel {
-  padding: 18px;
+  padding: 14px;
 }
 .district-overview-content .district-facts-grid {
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 140px), 1fr));
-  gap: 8px;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 120px), 1fr));
+  gap: 6px;
 }
 .district-overview-content .district-facts-grid > div {
-  padding: 10px;
+  padding: 8px;
+}
+.district-overview-content .district-facts-grid dt {
+  font-size: 0.82rem;
 }
 .district-overview-content .district-facts-grid dd {
-  font-size: 1rem;
+  font-size: 0.92rem;
 }
 .district-overview-content .local-government-list {
   margin-top: 12px;
@@ -153,7 +156,7 @@ img {
   font-size: 0.88rem;
 }
 .district-news-sidebar .district-news-grid {
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 8px;
   margin-top: 12px;
 }
@@ -744,11 +747,6 @@ img {
   }
   .district-news-sidebar .district-news-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  .district-news-sidebar .district-news-card span,
-  .district-news-sidebar .district-news-card small,
-  .district-news-sidebar .district-news-note {
-    display: none;
   }
 }
 @media (min-width: 651px) and (max-width: 900px) {

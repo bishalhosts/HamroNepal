@@ -6,13 +6,44 @@ const districtLinks = Object.fromEntries(
 );
 
 // Add owner-managed public links here. Each category accepts multiple links.
-// Example: districtLinks.achham.news.push({ label: "Local News", url: "https://example.com" });
+districtLinks.achham.news.push({ label: "Local News", url: "https://example.com" });
+
+
+
+
+
+ // Kathmandu District
+districtLinks.kathmandu.news.push({ label: "Bankingsamachar", url: "https://www.facebook.com/bankingsamachar" });
+districtLinks.kathmandu.news.push({ label: "RoutineOfNepalBanda", url: "https://www.facebook.com/officialroutineofnepalbanda" });
+districtLinks.kathmandu.news.push({ label: "Bankingsamachar", url: "https://bankingsamachar.com/" });
+
+
+
+
+
+
+//Bajura District
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const linkGroups = [
   ["news", "News websites"],
   ["facebook", "Facebook pages"],
-  ["websites", "Official websites"],
-  ["other", "Other useful links"],
 ];
 
 const page = document.querySelector(".province-page");
@@ -149,35 +180,45 @@ if (page && heading && districtSlug) {
 
   const description = document.createElement("p");
   description.textContent =
-    "Find news about this district, then browse local news sites, Facebook pages, official websites, and useful resources.";
+    "Browse district news and Facebook pages added by the site admin.";
   intro.append(description);
   header.append(intro);
 
-  const allLinks = linkGroups.flatMap(([category, label]) =>
-    (districtLinks[districtSlug]?.[category] ?? []).flatMap((link) => {
-      let url;
-      try {
-        url = new URL(link.url);
-      } catch {
-        console.error(`Invalid district resource URL: ${link.url}`);
-        return [];
-      }
+  const allLinks = Object.values(districtLinks[districtSlug] ?? {}).flatMap(
+    (categoryLinks) =>
+      categoryLinks.flatMap((link) => {
+        let url;
+        try {
+          url = new URL(link.url);
+        } catch {
+          console.error(`Invalid district resource URL: ${link.url}`);
+          return [];
+        }
 
-      if (!["http:", "https:"].includes(url.protocol)) {
-        console.error(`Unsupported district resource URL: ${link.url}`);
-        return [];
-      }
+        if (!["http:", "https:"].includes(url.protocol)) {
+          console.error(`Unsupported district resource URL: ${link.url}`);
+          return [];
+        }
 
-      return [
-        {
-          ...link,
-          category,
-          categoryLabel: label,
-          href: url.href,
-          domain: url.hostname.replace(/^www\./, ""),
-        },
-      ];
-    }),
+        const category =
+          url.hostname.toLowerCase() === "facebook.com" ||
+          url.hostname.toLowerCase().endsWith(".facebook.com")
+            ? "facebook"
+            : "news";
+        const categoryLabel = linkGroups.find(
+          ([group]) => group === category,
+        )?.[1];
+
+        return [
+          {
+            ...link,
+            category,
+            categoryLabel,
+            href: url.href,
+            domain: url.hostname.replace(/^www\./, ""),
+          },
+        ];
+      }),
   );
 
   const count = document.createElement("span");
@@ -196,18 +237,17 @@ if (page && heading && districtSlug) {
 
   const newsHeading = document.createElement("h3");
   newsHeading.id = "district-news-heading";
-  newsHeading.textContent = `Popular news searches · ${district.name}`;
+  newsHeading.textContent = `Popular news & Facebook links · ${district.name}`;
   newsFinder.append(newsHeading);
 
   const newsIntro = document.createElement("p");
   newsIntro.textContent =
-    "News links added by the site admin for this district appear here.";
+    "Open news websites and Facebook pages for this district.";
   newsFinder.append(newsIntro);
 
   const newsCards = document.createElement("div");
   newsCards.className = "district-news-grid";
-  const newsLinks = allLinks.filter((link) => link.category === "news");
-  for (const source of newsLinks) {
+  for (const source of allLinks) {
     const card = document.createElement("a");
     card.className = "district-news-card";
     card.href = source.href;
@@ -219,7 +259,7 @@ if (page && heading && districtSlug) {
     card.append(sourceName);
 
     const sourceDescription = document.createElement("span");
-    sourceDescription.textContent = `News link for ${district.name} District.`;
+    sourceDescription.textContent = source.categoryLabel;
     card.append(sourceDescription);
 
     const sourceDomain = document.createElement("small");
@@ -227,12 +267,13 @@ if (page && heading && districtSlug) {
     card.append(sourceDomain);
     newsCards.append(card);
   }
-  if (newsLinks.length > 0) {
+  if (allLinks.length > 0) {
     newsFinder.append(newsCards);
   } else {
     const emptyNews = document.createElement("p");
     emptyNews.className = "district-news-note";
-    emptyNews.textContent = "No news links have been added for this district yet.";
+    emptyNews.textContent =
+      "No news websites or Facebook pages have been added for this district yet.";
     newsFinder.append(emptyNews);
   }
   section.append(newsFinder);
@@ -277,7 +318,7 @@ if (page && heading && districtSlug) {
 
     const emptyMessage = document.createElement("p");
     emptyMessage.textContent =
-      "Local news sites, Facebook pages, official websites, and other resources will appear here when the site admin adds them.";
+      "News websites and Facebook pages will appear here when the site admin adds them.";
     emptyState.append(emptyMessage);
     section.append(emptyState);
   }
@@ -614,7 +655,7 @@ if (page && heading && districtSlug) {
   newsSidebar.className = "district-news-sidebar";
   newsSidebar.setAttribute(
     "aria-label",
-    "Popular news searches for this district",
+    "Popular district news and Facebook links",
   );
   newsSidebar.append(newsFinder);
 
