@@ -1086,30 +1086,6 @@ body {
 #calendar-app .detail .d-en {
   font-size: 0.8rem;
 }
-.calendar-expand {
-  width: 100%;
-  margin-top: 10px;
-  border: 1px solid var(--line);
-  border-radius: 9px;
-  padding: 8px 12px;
-  background: var(--paper);
-  color: var(--ink);
-  font: inherit;
-  font-weight: 700;
-  cursor: pointer;
-}
-.calendar-sidebar.is-expanded {
-  width: min(440px, calc(100vw - 24px));
-}
-.calendar-sidebar.is-expanded #calendar-app .cell {
-  min-height: 62px;
-}
-.calendar-sidebar.is-expanded #calendar-app .np {
-  font-size: 1.35rem;
-}
-.calendar-sidebar.is-expanded #calendar-app .en {
-  font-size: 0.78rem;
-}
 .province-details {
   border-radius: 16px;
   margin: 0 clamp(12px, 3vw, 36px) 24px;
@@ -1202,9 +1178,6 @@ body {
     width: 100%;
     margin-top: 12px;
   }
-  .calendar-sidebar.is-expanded {
-    width: 100%;
-  }
   .province-details {
     margin-left: 12px;
     margin-right: 12px;
@@ -1222,15 +1195,6 @@ body {
   }
   .theme-toggle {
     padding: 5px 9px;
-  }
-}
-
-.atlas-layout:has(.calendar-sidebar.is-expanded) {
-  grid-template-columns: minmax(0, 1fr) 440px;
-}
-@media (max-width: 700px) {
-  .atlas-layout:has(.calendar-sidebar.is-expanded) {
-    display: flex;
   }
 }
 
@@ -1333,9 +1297,6 @@ body {
   }
   .legend small {
     display: none;
-  }
-  .calendar-sidebar {
-    order: 0;
   }
 }
 

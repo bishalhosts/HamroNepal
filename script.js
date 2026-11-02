@@ -1,5 +1,4 @@
 (function () {
-  const sidebar = document.querySelector(".calendar-sidebar");
   const atlasLayout = document.querySelector(".atlas-layout");
 
   if (atlasLayout) {
@@ -13,22 +12,9 @@
       .forEach((link) => {
         link.addEventListener("click", () => setFocus(link.hash));
       });
-
     window.addEventListener("hashchange", () => setFocus(window.location.hash));
     setFocus(window.location.hash);
   }
-
-  const expandButton = document.getElementById("calendar-expand");
-
-  expandButton.addEventListener("click", () => {
-    const expanded = sidebar.classList.toggle("is-expanded");
-
-    expandButton.setAttribute("aria-expanded", String(expanded));
-
-    expandButton.textContent = expanded
-      ? "Show compact calendar"
-      : "Expand calendar";
-  });
 })();
 
 (function () {
