@@ -23,6 +23,28 @@
     <header class="site-header">
       <a class="brand" href="#main-content"
         >Hamro Nepal <span>Calendar · Atlas · News</span></a>
+      <form class="place-finder header-place-finder" role="search" autocomplete="off">
+        <label class="visually-hidden" for="place-search">
+          Find a province or district
+        </label>
+        <input
+          id="place-search"
+          type="search"
+          placeholder="Search a province or district"
+          aria-describedby="place-search-help"
+          aria-controls="place-search-results"
+        />
+        <p id="place-search-help" class="visually-hidden">
+          Type a place name to see matching province and district pages.
+        </p>
+        <div id="place-search-results" class="place-search-results"></div>
+        <p
+          id="place-search-status"
+          class="visually-hidden"
+          role="status"
+          aria-live="polite"
+        ></p>
+      </form>
       <div id="nepal-live-time" aria-label="Current time in Nepal">
         <span class="time-label">Nepal time</span>
         <time id="nepal-clock">--:--:--</time>
@@ -43,42 +65,11 @@
         </button>
       </nav>
     </header>
-    <aside class="site-notice">
-      <p>
-        Nepal calendar, interactive district atlas, and local news finder. Open
-        any district to search its news and discover local websites.
-        <a href="#map">Start with the map</a>
-      </p>
-    </aside>
     <main id="main-content">
       <section class="hero">
         <p class="hero-kicker">NEPAL CALENDAR · DISTRICT ATLAS · LOCAL NEWS</p>
-        <h1>Seven provinces,<br />one map.</h1>
-        <p>
-          Explore each district and find its news coverage, local websites, and
-          Facebook pages. Select a province or search for a place directly.
-        </p>
-        <form class="place-finder" role="search" autocomplete="off">
-          <label for="place-search">Find a province or district</label>
-          <input
-            id="place-search"
-            type="search"
-            placeholder="Try Kathmandu, Bagmati, or Achham"
-            aria-describedby="place-search-help"
-            aria-controls="place-search-results"
-          />
-          <p id="place-search-help">
-            Type a name to see matching pages. You can also explore the map
-            below.
-          </p>
-          <div id="place-search-results" class="place-search-results"></div>
-          <p
-            id="place-search-status"
-            class="visually-hidden"
-            role="status"
-            aria-live="polite"
-          ></p>
-        </form>
+        <h1>Explore Nepal</h1>
+        <p>Select a province on the map or search for a district.</p>
       </section>
 
       <div class="atlas-layout">

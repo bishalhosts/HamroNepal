@@ -230,6 +230,12 @@ body {
 }
 
 /* Nepal Atlas styles */
+html,
+body {
+  display: block;
+  padding: 0;
+}
+
 :root {
   --paper: #f3f6fb;
   --surface: #ffffff;
@@ -1213,5 +1219,117 @@ body {
 @media (max-width: 700px) {
   .atlas-layout:has(.calendar-sidebar.is-expanded) {
     display: flex;
+  }
+}
+
+/* Keep the map, calendar, and place search prominent on the landing page. */
+.site-header {
+  flex-wrap: wrap;
+  row-gap: 10px;
+}
+.site-header .brand {
+  order: 1;
+}
+.header-place-finder {
+  position: relative;
+  order: 2;
+  flex: 1 1 240px;
+  width: min(100%, 400px);
+  margin: 0;
+  text-align: left;
+}
+.header-place-finder input {
+  min-height: 42px;
+  padding: 8px 13px;
+}
+.header-place-finder #place-search-results {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  left: 0;
+  z-index: 20;
+  max-height: min(360px, calc(100vh - 180px));
+  overflow-y: auto;
+}
+.header-place-finder .place-search-list {
+  max-height: min(320px, calc(100vh - 220px));
+}
+.site-header #nepal-live-time {
+  order: 3;
+  margin-left: 0;
+}
+.site-header nav {
+  order: 4;
+  flex: 1 0 100%;
+  justify-content: center;
+  gap: 8px 20px;
+}
+.site-header nav a {
+  margin: 0;
+}
+.hero {
+  padding: 10px 16px 4px;
+}
+.hero .hero-kicker {
+  margin-bottom: 2px;
+  font-size: 0.72rem;
+}
+.hero h1 {
+  margin: 0;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+}
+.hero > p:last-child {
+  font-size: 0.95rem;
+}
+.atlas-layout {
+  padding-top: 0;
+}
+.atlas-layout .map-section {
+  padding-top: 4px;
+}
+.calendar-sidebar {
+  margin-top: 4px;
+}
+
+@media (max-width: 700px) {
+  .site-header #nepal-live-time {
+    margin-left: auto;
+    order: 2;
+  }
+  .site-header nav {
+    order: 4;
+  }
+  .header-place-finder {
+    order: 3;
+    flex-basis: 100%;
+    width: 100%;
+  }
+  .legend {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 4px;
+    margin-top: 8px;
+  }
+  .legend button {
+    justify-content: center;
+    gap: 4px;
+    padding: 6px 2px;
+    font-size: 0.72rem;
+  }
+  .legend .swatch {
+    width: 10px;
+    height: 10px;
+  }
+  .legend small {
+    display: none;
+  }
+  .calendar-sidebar {
+    order: 0;
+  }
+}
+
+@media (max-width: 520px) {
+  .site-header nav {
+    justify-content: space-between;
+    gap: 8px;
   }
 }
