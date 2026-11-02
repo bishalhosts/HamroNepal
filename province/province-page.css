@@ -32,9 +32,10 @@ body {
 }
 .atlas-page-header {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  gap: 16px;
+  gap: 10px 16px;
   position: sticky;
   top: 0;
   z-index: 10;
@@ -43,6 +44,7 @@ body {
   border-bottom: 1px solid var(--line, #e1e5ee);
 }
 .atlas-page-brand {
+  min-width: 0;
   font-family: "Yatra One", "Mukta", sans-serif;
   font-size: 1.5rem;
   color: var(--blue, #003893);
@@ -56,14 +58,21 @@ body {
 }
 .atlas-page-header nav {
   display: flex;
+  align-items: center;
   flex-wrap: wrap;
   justify-content: flex-end;
   gap: 8px 20px;
 }
 .atlas-page-header nav a {
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
   color: var(--ink, #14213d);
   font-weight: 600;
   text-decoration: none;
+}
+.atlas-page-header .theme-toggle {
+  flex: 0 0 auto;
 }
 .atlas-page-header nav a:hover {
   color: var(--crimson, #c8102e);
@@ -709,16 +718,28 @@ img {
 }
 @media (max-width: 650px) {
   .atlas-page-header {
-    flex-wrap: wrap;
-    gap: 10px;
-    padding: 12px 16px;
+    gap: 8px 12px;
+    padding: 10px 12px;
+  }
+  .atlas-page-brand {
+    flex: 1 1 140px;
+    font-size: clamp(1.15rem, 5vw, 1.4rem);
+    line-height: 1.1;
+  }
+  .atlas-page-header #nepal-live-time {
+    flex: 0 0 auto;
+    margin-left: auto;
+  }
+  .atlas-page-header #nepal-live-time .time-label,
+  .atlas-page-header #nepal-live-time .time-zone {
+    display: none;
   }
   .atlas-page-header nav {
     order: 3;
     width: 100%;
-    justify-content: space-between;
-    gap: 8px 12px;
-    font-size: 0.92rem;
+    justify-content: flex-start;
+    gap: 4px 14px;
+    font-size: 0.88rem;
   }
   .atlas-page-brand span {
     display: none;
@@ -766,5 +787,31 @@ img {
   .district-links-header {
     flex-direction: column;
     gap: 12px;
+  }
+}
+
+body:has(.province-page) > .site-header {
+  flex-wrap: wrap;
+  row-gap: 8px;
+}
+body:has(.province-page) > .site-header .brand {
+  order: 1;
+}
+body:has(.province-page) > .site-header #nepal-live-time {
+  order: 2;
+  margin-left: auto;
+}
+body:has(.province-page) > .site-header nav {
+  order: 3;
+  flex: 0 1 auto;
+  width: auto;
+  justify-content: flex-end;
+}
+
+@media (max-width: 1100px) {
+  body:has(.province-page) > .site-header nav {
+    flex: 1 0 100%;
+    width: 100%;
+    justify-content: flex-start;
   }
 }

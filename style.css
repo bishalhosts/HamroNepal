@@ -1047,16 +1047,28 @@ body {
   height: 34px;
 }
 #calendar-app .title h1 {
-  font-size: 1.25rem;
+  min-width: 0;
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  text-align: center;
+}
+#calendar-app .title {
+  display: grid;
+  grid-template-columns: auto auto;
+  align-items: center;
+  justify-content: center;
+  gap: 0 6px;
+  min-width: 0;
+  text-align: center;
 }
 #calendar-app .sub {
+  grid-column: 1 / -1;
   font-size: 0.78rem;
-}
-#calendar-app .tools {
-  margin: 7px 0;
+  text-align: center;
 }
 #calendar-app .today-btn {
-  padding: 4px 10px;
+  min-height: 32px;
+  padding: 3px 9px;
+  white-space: nowrap;
 }
 #calendar-app .weekdays {
   font-size: 0.76rem;
@@ -1268,12 +1280,29 @@ body {
 }
 
 @media (max-width: 700px) {
+  .site-header {
+    gap: 8px 10px;
+    padding: 8px 12px;
+  }
+  .site-header .brand {
+    font-size: clamp(1.15rem, 5vw, 1.4rem);
+    line-height: 1.1;
+  }
   .site-header #nepal-live-time {
     margin-left: auto;
     order: 2;
+    flex: 0 0 auto;
+  }
+  .site-header #nepal-live-time .time-label,
+  .site-header #nepal-live-time .time-zone {
+    display: none;
   }
   .site-header nav {
     order: 4;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 2px 12px;
+    font-size: 0.84rem;
   }
   .header-place-finder {
     order: 3;
@@ -1302,8 +1331,8 @@ body {
 
 @media (max-width: 520px) {
   .site-header nav {
-    justify-content: space-between;
-    gap: 8px;
+    justify-content: flex-start;
+    gap: 0 10px;
   }
 }
 
