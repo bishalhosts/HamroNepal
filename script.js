@@ -174,20 +174,13 @@
         .replace(/[^a-z0-9]+/g, "-")
         .replace(/^-|-$/g, "");
 
-    const places = Object.values(PROVINCES).flatMap((province) => [
-      {
-        name: province.name,
-        type: "Province",
-        province: province.np,
-        href: `province/${slugify(province.name)}.html`,
-      },
-      ...province.districts.map((district) => ({
+    const places = Object.values(PROVINCES).flatMap((province) =>
+      province.districts.map((district) => ({
         name: district,
-        type: "District",
-        province: province.name,
+        type: "District profile",
         href: `District/${slugify(district)}.html`,
       })),
-    ]);
+    );
 
     placeSearch.addEventListener("input", () => {
       const query = placeSearch.value.trim().toLocaleLowerCase();
@@ -235,7 +228,7 @@
         link.append(name);
 
         const detail = document.createElement("small");
-        detail.textContent = `${place.type} · ${place.province}`;
+        detail.textContent = place.type;
         link.append(detail);
 
         item.append(link);
