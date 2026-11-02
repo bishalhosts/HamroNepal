@@ -203,6 +203,20 @@ img {
   margin: 0 auto;
   padding: clamp(24px, 5vw, 56px) clamp(16px, 4vw, 32px);
 }
+.map-library-districts {
+  padding-top: 12px;
+}
+.district-map-page > h1 {
+  margin: 0;
+  color: var(--blue, #003893);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+}
+.district-map-page > .map-library-intro {
+  margin: 4px 0 8px;
+}
+.district-map-search-section {
+  margin-top: 18px;
+}
 .map-library > h1 {
   margin: 0;
   color: var(--blue, #003893);

@@ -20,36 +20,10 @@
         <a href="index.html#map">Home</a>
       </nav>
     </header>
-    <main id="main-content" class="map-library">
-      <p class="eyebrow">DISTRICTS &amp; NEWS</p>
-      <h1>Explore all 77 districts</h1>
-      <p class="map-library-intro">
-        Select a district on the map to open its page, or search for a district
-        by name.
-      </p>
-
-      <section class="map-library-section" aria-labelledby="district-map-heading">
-        <h2 id="district-map-heading">Clickable district map</h2>
-        <form id="district-map-search-form">
-          <label class="district-map-search" for="district-map-search">
-            Search by district name
-            <input
-              id="district-map-search"
-              type="search"
-              list="district-name-options"
-              placeholder="e.g. Kathmandu"
-              autocomplete="off"
-              aria-describedby="district-map-count"
-            />
-          </label>
-          <datalist id="district-name-options"></datalist>
-          <button class="district-map-submit" type="submit">
-            Open district
-          </button>
-        </form>
-        <p id="district-map-count" class="district-map-count" aria-live="polite">
-          Select a district on the map, or search by name.
-        </p>
+    <main id="main-content" class="map-library map-library-districts">
+      <section class="district-map-page" aria-labelledby="district-map-heading">
+        <h1 id="district-map-heading">Districts &amp; News</h1>
+        <p class="map-library-intro">Click a district to visit its page.</p>
         <object
           class="district-map-object"
           data="nepal-districts.svg"
@@ -61,6 +35,32 @@
             <a href="nepal-districts.svg">Open the district map</a>.
           </p>
         </object>
+      </section>
+      <section
+        class="map-library-section district-map-search-section"
+        aria-labelledby="district-map-search-heading"
+      >
+        <h2 id="district-map-search-heading">Find a district by name</h2>
+        <form id="district-map-search-form">
+          <label class="district-map-search" for="district-map-search">
+            <input
+              id="district-map-search"
+              type="search"
+              list="district-name-options"
+              placeholder="Search districts, e.g. Kathmandu"
+              autocomplete="off"
+              aria-describedby="district-map-count"
+              aria-label="Search by district name"
+            />
+          </label>
+          <datalist id="district-name-options"></datalist>
+          <button class="district-map-submit" type="submit">
+            Open district
+          </button>
+        </form>
+        <p id="district-map-count" class="district-map-count" aria-live="polite">
+          Or search by district name.
+        </p>
       </section>
     </main>
     <footer class="site-footer">
