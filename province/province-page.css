@@ -74,6 +74,13 @@ body {
 .atlas-page-header .theme-toggle {
   flex: 0 0 auto;
 }
+.atlas-page-header .header-date-summary {
+  order: 3;
+  flex: 0 1 auto;
+}
+.atlas-page-header nav {
+  order: 4;
+}
 .atlas-page-header nav a:hover {
   color: var(--crimson, #c8102e);
 }
@@ -730,12 +737,16 @@ img {
     flex: 0 0 auto;
     margin-left: auto;
   }
+  .atlas-page-header .header-date-summary {
+    order: 3;
+    max-width: min(210px, 100%);
+  }
   .atlas-page-header #nepal-live-time .time-label,
   .atlas-page-header #nepal-live-time .time-zone {
     display: none;
   }
   .atlas-page-header nav {
-    order: 3;
+    order: 4;
     width: 100%;
     justify-content: flex-start;
     gap: 4px 14px;

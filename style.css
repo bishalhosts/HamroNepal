@@ -367,6 +367,26 @@ a {
 #nepal-live-time .time-zone {
   font-size: 0.8rem;
 }
+.header-date-summary.detail {
+  order: 4;
+  max-width: 260px;
+  margin: 0;
+  padding: 5px 9px;
+  border-radius: 7px;
+}
+.header-date-summary.detail .d-np {
+  font-size: 0.95rem;
+  line-height: 1.25;
+}
+.header-date-summary.detail .d-en {
+  font-size: 0.78rem;
+  line-height: 1.25;
+}
+.header-date-summary.detail .d-tag {
+  margin-top: 2px;
+  font-size: 0.72rem;
+  line-height: 1.2;
+}
 
 /* Hero */
 .hero {
@@ -1247,7 +1267,7 @@ body {
   margin-left: 0;
 }
 .site-header nav {
-  order: 4;
+  order: 5;
   flex: 1 0 100%;
   justify-content: center;
   gap: 8px 20px;
@@ -1293,19 +1313,24 @@ body {
     order: 2;
     flex: 0 0 auto;
   }
+  .site-header .header-date-summary {
+    order: 3;
+    flex: 0 1 auto;
+    max-width: min(210px, 100%);
+  }
   .site-header #nepal-live-time .time-label,
   .site-header #nepal-live-time .time-zone {
     display: none;
   }
   .site-header nav {
-    order: 4;
+    order: 5;
     justify-content: flex-start;
     flex-wrap: wrap;
     gap: 2px 12px;
     font-size: 0.84rem;
   }
   .header-place-finder {
-    order: 3;
+    order: 4;
     flex-basis: 100%;
     width: 100%;
   }

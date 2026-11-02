@@ -380,6 +380,44 @@
     return null;
   }
 
+  function updateDateSummary(element, date, isToday) {
+    const ad = adFromBS(date.year, date.month, date.day);
+    const weekday = ad.getUTCDay();
+
+    element.className =
+      "detail header-date-summary" + (weekday === 6 ? " sat" : "");
+
+    const nepaliDate = document.createElement("p");
+    nepaliDate.className = "d-np";
+    nepaliDate.textContent = `${WEEKDAYS_FULL[weekday]}, ${toNepali(date.day)} ${MONTHS[date.month]} ${toNepali(date.year)}`;
+
+    const englishDate = document.createElement("p");
+    englishDate.className = "d-en";
+    englishDate.textContent = `${AD_WEEKDAYS[weekday]}, ${ad.getUTCDate()} ${AD_MONTHS[ad.getUTCMonth()]} ${ad.getUTCFullYear()}`;
+
+    element.replaceChildren(nepaliDate, englishDate);
+
+    if (isToday) {
+      const todayTag = document.createElement("span");
+      todayTag.className = "d-tag";
+      todayTag.textContent = "आज · Today";
+      element.append(todayTag);
+    }
+  }
+
+  if (!document.getElementById("calendar-app")) {
+    const dateSummary = document.getElementById("detail");
+    const currentDate = bsFromAD(nepalToday());
+
+    if (dateSummary && currentDate) {
+      updateDateSummary(dateSummary, currentDate, true);
+    } else if (!currentDate) {
+      console.error("Could not convert today's Nepal date for the shared header.");
+    }
+
+    return;
+  }
+
   /* ---------- State ---------- */
 
   let today = bsFromAD(nepalToday());
@@ -480,19 +518,7 @@
       return;
     }
 
-    const ad = adFromBS(selected.year, selected.month, selected.day);
-
-    const wd = ad.getUTCDay();
-
-    el.detail.className = "detail" + (wd === 6 ? " sat" : "");
-
-    el.detail.innerHTML = `
-
-    <p class="d-np">${WEEKDAYS_FULL[wd]}, ${toNepali(selected.day)} ${MONTHS[selected.month]} ${toNepali(selected.year)}</p>
-
-    <p class="d-en">${AD_WEEKDAYS[wd]}, ${ad.getUTCDate()} ${AD_MONTHS[ad.getUTCMonth()]} ${ad.getUTCFullYear()}</p>
-
-    ${same(selected, today) ? '<span class="d-tag">आज · Today</span>' : ""}`;
+    updateDateSummary(el.detail, selected, same(selected, today));
   }
 
   /* ---------- Events ---------- */

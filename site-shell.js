@@ -1,4 +1,5 @@
 (function () {
+  const shellScript = document.currentScript;
   const header = document.querySelector("header");
 
   if (header) {
@@ -91,6 +92,26 @@
 
       updateNepalClock();
       window.setInterval(updateNepalClock, 1000);
+    }
+
+    let dateSummary = document.getElementById("detail");
+
+    if (!dateSummary) {
+      dateSummary = document.createElement("section");
+      dateSummary.className = "detail header-date-summary";
+      dateSummary.id = "detail";
+      dateSummary.setAttribute("aria-live", "polite");
+      dateSummary.setAttribute("aria-label", "Current Nepali date");
+      header.insertBefore(dateSummary, navigation);
+    }
+
+    if (!document.getElementById("calendar-app") && shellScript) {
+      const calendarScript = document.createElement("script");
+      calendarScript.src = new URL("calendar.js", shellScript.src).href;
+      calendarScript.addEventListener("error", () => {
+        console.error("Could not load the Nepal calendar for the shared header date.");
+      });
+      document.body.append(calendarScript);
     }
   }
 
