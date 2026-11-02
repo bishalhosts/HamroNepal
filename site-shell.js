@@ -2,6 +2,56 @@
   const header = document.querySelector("header");
 
   if (header) {
+    const navigation = header.querySelector("nav");
+    let themeButton = document.getElementById("theme-toggle");
+
+    if (!themeButton && navigation) {
+      themeButton = document.createElement("button");
+      themeButton.className = "theme-toggle";
+      themeButton.id = "theme-toggle";
+      themeButton.type = "button";
+      navigation.append(themeButton);
+    }
+
+    if (themeButton) {
+      let savedTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light";
+      try {
+        const storedTheme = window.localStorage.getItem("nepal-atlas-theme");
+        if (storedTheme === "light" || storedTheme === "dark") {
+          savedTheme = storedTheme;
+        }
+      } catch (error) {
+        console.warn("Could not read the saved theme preference.", error);
+      }
+
+      const applyTheme = (theme) => {
+        document.documentElement.dataset.theme = theme;
+        document
+          .querySelector('meta[name="theme-color"]')
+          ?.setAttribute("content", theme === "dark" ? "#101827" : "#ffffff");
+        themeButton.textContent =
+          theme === "dark" ? "☀ Light mode" : "☾ Dark mode";
+        themeButton.setAttribute("aria-pressed", String(theme === "dark"));
+
+        try {
+          window.localStorage.setItem("nepal-atlas-theme", theme);
+        } catch (error) {
+          console.warn("Could not save the theme preference.", error);
+        }
+      };
+
+      applyTheme(savedTheme);
+      themeButton.addEventListener("click", () => {
+        applyTheme(
+          document.documentElement.dataset.theme === "dark" ? "light" : "dark",
+        );
+      });
+    } else {
+      console.error("Could not add the theme toggle because the header has no navigation.");
+    }
+
     let clock = document.getElementById("nepal-live-time");
 
     if (!clock) {

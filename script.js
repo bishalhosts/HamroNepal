@@ -1,45 +1,22 @@
 (function () {
-  const root = document.documentElement;
+  const sidebar = document.querySelector(".calendar-sidebar");
+  const atlasLayout = document.querySelector(".atlas-layout");
 
-  const themeButton = document.getElementById("theme-toggle");
-
-  let savedTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "light";
-  try {
-    const storedTheme = localStorage.getItem("nepal-atlas-theme");
-    if (storedTheme === "light" || storedTheme === "dark") {
-      savedTheme = storedTheme;
-    }
-  } catch (error) {
-    console.warn("Could not read the saved theme preference.", error);
-  }
-
-  function applyTheme(theme) {
-    root.dataset.theme = theme;
+  if (atlasLayout) {
+    const setFocus = (hash) => {
+      atlasLayout.classList.toggle("calendar-first", hash === "#calendar-app");
+      atlasLayout.classList.toggle("map-first", hash === "#map");
+    };
 
     document
-      .querySelector('meta[name="theme-color"]')
-      ?.setAttribute("content", theme === "dark" ? "#101827" : "#ffffff");
+      .querySelectorAll('.site-header nav a[href="#map"], .site-header nav a[href="#calendar-app"]')
+      .forEach((link) => {
+        link.addEventListener("click", () => setFocus(link.hash));
+      });
 
-    themeButton.textContent = theme === "dark" ? "☀ Light mode" : "☾ Dark mode";
-
-    themeButton.setAttribute("aria-pressed", String(theme === "dark"));
-
-    try {
-      localStorage.setItem("nepal-atlas-theme", theme);
-    } catch (error) {
-      console.warn("Could not save the theme preference.", error);
-    }
+    window.addEventListener("hashchange", () => setFocus(window.location.hash));
+    setFocus(window.location.hash);
   }
-
-  applyTheme(savedTheme);
-
-  themeButton.addEventListener("click", () =>
-    applyTheme(root.dataset.theme === "dark" ? "light" : "dark"),
-  );
-
-  const sidebar = document.querySelector(".calendar-sidebar");
 
   const expandButton = document.getElementById("calendar-expand");
 

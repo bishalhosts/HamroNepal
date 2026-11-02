@@ -69,19 +69,32 @@
       <section class="hero">
         <p class="hero-kicker">NEPAL CALENDAR · DISTRICT ATLAS · LOCAL NEWS</p>
         <h1>Explore Nepal</h1>
-        <p>Select a province on the map or search for a district.</p>
+        <p>Select any district on the map or search for it by name.</p>
       </section>
 
       <div class="atlas-layout">
         <div class="atlas-main">
           <section class="map-section" id="map" aria-labelledby="map-heading">
             <h2 id="map-heading" class="visually-hidden">
-              Map of Nepal's provinces
+              Map of all 77 districts in Nepal
             </h2>
 
             <div class="map-wrap">
+              <object
+                class="district-map-object"
+                data="nepal-districts.svg"
+                type="image/svg+xml"
+                aria-label="Interactive map of all 77 districts in Nepal"
+              >
+                <p>
+                  The interactive district map is unavailable.
+                  <a href="nepal-districts.svg">Open the district map</a>.
+                </p>
+              </object>
               <svg
                 id="nepal-map"
+                class="province-map-legacy"
+                hidden
                 viewBox="0 0 1000 575"
                 role="group"
                 aria-label="Map of Nepal with seven provinces"
@@ -186,7 +199,12 @@
               ></div>
             </div>
 
-            <ul class="legend" id="legend" aria-label="Provinces"></ul>
+            <ul
+              class="legend"
+              id="legend"
+              aria-label="Provinces"
+              hidden
+            ></ul>
           </section>
         </div>
         <aside class="calendar-sidebar" aria-label="Nepali calendar sidebar">

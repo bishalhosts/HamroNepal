@@ -3,9 +3,10 @@ Hamro Nepal — Calendar, Atlas & News
 
 Nepal SVG maps
 ==============
-Open maps.html to browse all national, province, and district maps.
+Open maps.html to explore the combined map of all 77 districts and open a
+district page by clicking its boundary or searching by name.
 nepal-provinces.svg   7 provinces (numbered)
-nepal-districts.svg   all 77 districts, coloured by province, province borders in dark blue
+nepal-districts.svg   clickable map of all 77 districts, coloured by province
 provinces/            one SVG per province, with its districts and district names
 districts/             one SVG per district (77 files)
 
@@ -28,7 +29,11 @@ Notes
   style and 1440px maximum content width as the landing page on mobile,
   tablet, and desktop.
 - Every page loads site-shell.js for the Nepal-time header clock and shared
-  footer. The clock stays visible with the sticky header.
+  footer and shared light/dark theme toggle. The theme preference is shared
+  across pages.
+- The home page header links reorder the calendar and map with a short
+  animation. The home page and Districts & news page show the combined map of
+  all 77 districts, with each district boundary linking directly to its page.
 - Link-management instructions are kept in this text file and are not shown
   on public district pages.
 - The "Popular news searches" section on each district page shows only news

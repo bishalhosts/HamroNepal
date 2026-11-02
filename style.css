@@ -485,6 +485,18 @@ a {
   height: auto;
   display: block;
 }
+#nepal-map[hidden] {
+  display: none;
+}
+#legend[hidden] {
+  display: none;
+}
+.district-map-object {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1200 / 719;
+  border: 0;
+}
 
 .province {
   stroke: #fff;
@@ -1331,5 +1343,97 @@ body {
   .site-header nav {
     justify-content: space-between;
     gap: 8px;
+  }
+}
+
+.atlas-layout.calendar-first,
+.atlas-layout.map-first {
+  grid-template-columns: minmax(0, 1fr);
+}
+.atlas-layout.calendar-first .calendar-sidebar,
+.atlas-layout.map-first .atlas-main {
+  grid-column: 1;
+  grid-row: 1;
+  position: relative;
+  top: auto;
+  width: 100%;
+}
+.atlas-layout.calendar-first .calendar-sidebar {
+  width: min(100%, 760px);
+  justify-self: center;
+}
+.atlas-layout.calendar-first .atlas-main,
+.atlas-layout.map-first .calendar-sidebar {
+  grid-column: 1;
+  grid-row: 2;
+}
+.atlas-layout.calendar-first .calendar-sidebar,
+.atlas-layout.calendar-first .atlas-main,
+.atlas-layout.map-first .atlas-main,
+.atlas-layout.map-first .calendar-sidebar {
+  animation: atlas-section-in 0.3s ease both;
+}
+#map,
+#calendar-app {
+  scroll-margin-top: 148px;
+}
+@keyframes atlas-section-in {
+  from {
+    opacity: 0.75;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+:root[data-theme="dark"] .district:hover,
+:root[data-theme="dark"] .district:focus,
+:root[data-theme="dark"] .district-links-saved-toggle:hover:not(:disabled),
+:root[data-theme="dark"] .district-link-actions button:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--blue) 16%, var(--surface));
+}
+:root[data-theme="dark"] .district-links-saved-toggle[aria-pressed="true"],
+:root[data-theme="dark"] .district-link-save[aria-pressed="true"] {
+  background: color-mix(in srgb, var(--blue) 16%, var(--surface));
+}
+
+@media (max-width: 700px) {
+  .atlas-layout.calendar-first,
+  .atlas-layout.map-first {
+    display: flex;
+    flex-direction: column;
+  }
+  .atlas-layout .atlas-main {
+    order: 0;
+  }
+  .atlas-layout .calendar-sidebar {
+    position: static;
+    order: 1;
+    width: 100%;
+    margin-top: 12px;
+  }
+  .atlas-layout.calendar-first .calendar-sidebar {
+    order: 0;
+    width: 100%;
+  }
+  .atlas-layout.calendar-first .atlas-main {
+    order: 1;
+  }
+  .atlas-layout.map-first .calendar-sidebar {
+    order: 1;
+  }
+  .atlas-layout.map-first .atlas-main {
+    order: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .atlas-layout.calendar-first .calendar-sidebar,
+  .atlas-layout.calendar-first .atlas-main,
+  .atlas-layout.map-first .atlas-main,
+  .atlas-layout.map-first .calendar-sidebar {
+    animation: none;
   }
 }
