@@ -7,21 +7,12 @@ const districtLinks = Object.fromEntries(
 
 // Add owner-managed public links here. Each category accepts multiple links.
 // Example: districtLinks.achham.news.push({ label: "Local News", url: "https://example.com" });
-districtLinks.achham.news.push(
-  // { label: "Local News", url: "https://example.com" },
-);
 
 const linkGroups = [
   ["news", "News websites"],
   ["facebook", "Facebook pages"],
   ["websites", "Official websites"],
   ["other", "Other useful links"],
-];
-
-const newsSources = [
-  ["Onlinekhabar", "onlinekhabar.com"],
-  ["Setopati", "setopati.com"],
-  ["Kantipur", "ekantipur.com"],
 ];
 
 const page = document.querySelector(".province-page");
@@ -210,33 +201,16 @@ if (page && heading && districtSlug) {
 
   const newsIntro = document.createElement("p");
   newsIntro.textContent =
-    "Find recent district coverage from Google News and popular Nepali outlets.";
+    "News links added by the site admin for this district appear here.";
   newsFinder.append(newsIntro);
 
   const newsCards = document.createElement("div");
   newsCards.className = "district-news-grid";
-  const newsSearches = [
-    {
-      label: "Google News",
-      domain: "news.google.com",
-      query: `${district.name} ${district.province} Nepal`,
-      description: "Search recent headlines from multiple news sources.",
-      newsGoogle: true,
-    },
-    ...newsSources.map(([label, domain]) => ({
-      label,
-      domain,
-      query: `site:${domain} "${district.name}"`,
-      description: `Search ${label} for ${district.name} stories.`,
-    })),
-  ];
-
-  for (const source of newsSearches) {
+  const newsLinks = allLinks.filter((link) => link.category === "news");
+  for (const source of newsLinks) {
     const card = document.createElement("a");
     card.className = "district-news-card";
-    card.href = source.newsGoogle
-      ? `https://news.google.com/search?q=${encodeURIComponent(source.query)}`
-      : `https://www.google.com/search?q=${encodeURIComponent(source.query)}`;
+    card.href = source.href;
     card.target = "_blank";
     card.rel = "noopener noreferrer";
 
@@ -245,7 +219,7 @@ if (page && heading && districtSlug) {
     card.append(sourceName);
 
     const sourceDescription = document.createElement("span");
-    sourceDescription.textContent = source.description;
+    sourceDescription.textContent = `News link for ${district.name} District.`;
     card.append(sourceDescription);
 
     const sourceDomain = document.createElement("small");
@@ -253,13 +227,14 @@ if (page && heading && districtSlug) {
     card.append(sourceDomain);
     newsCards.append(card);
   }
-  newsFinder.append(newsCards);
-
-  const newsNote = document.createElement("p");
-  newsNote.className = "district-news-note";
-  newsNote.textContent =
-    "These links open Google or Google News search results; coverage depends on the outlet and search engine.";
-  newsFinder.append(newsNote);
+  if (newsLinks.length > 0) {
+    newsFinder.append(newsCards);
+  } else {
+    const emptyNews = document.createElement("p");
+    emptyNews.className = "district-news-note";
+    emptyNews.textContent = "No news links have been added for this district yet.";
+    newsFinder.append(emptyNews);
+  }
   section.append(newsFinder);
 
   const categorySlots = document.createElement("div");
@@ -302,7 +277,7 @@ if (page && heading && districtSlug) {
 
     const emptyMessage = document.createElement("p");
     emptyMessage.textContent =
-      "Use the news searches above to find current coverage. Local news sites, Facebook pages, official websites, and other resources will appear here when available.";
+      "Local news sites, Facebook pages, official websites, and other resources will appear here when the site admin adds them.";
     emptyState.append(emptyMessage);
     section.append(emptyState);
   }

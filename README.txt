@@ -28,16 +28,15 @@ Notes
   footer. The clock stays visible with the sticky header.
 - Link-management instructions are kept in this text file and are not shown
   on public district pages.
-- Every district page includes a "Find [district] news" section with Google
-  News and outlet-specific searches for Onlinekhabar, Setopati, and Kantipur.
-  These open external search results; the site does not publish or host news
-  stories. Curated district news and community links can also be added below.
+- The "Popular news searches" section on each district page shows only news
+  links added by the site owner for that district. It does not generate
+  Google News or Onlinekhabar, Setopati, or Kantipur searches automatically.
 - District pages show a smaller boundary map and a popular news-search panel
   beside the profile on desktop; on tablet and mobile, the news panel moves
   above the district details so it is easy to find.
 
-Adding district website and Facebook links
-===========================================
+Adding district news and resource links
+=======================================
 1. Open District/district-links.js in the project folder.
 2. Find the link examples near the top of the file.
 3. Add a line for the district slug, using one of these categories:
@@ -45,7 +44,11 @@ Adding district website and Facebook links
    - websites: official websites
    - news: news websites
    - other: other useful resources
-4. For example, to add links to Kathmandu:
+4. For example, to add a news link and Facebook page for Kathmandu:
+   districtLinks.kathmandu.news.push({
+     label: "Kathmandu News",
+     url: "https://example.com/kathmandu-news",
+   });
    districtLinks.kathmandu.facebook.push({
      label: "Kathmandu Facebook page",
      url: "https://www.facebook.com/your-page",
