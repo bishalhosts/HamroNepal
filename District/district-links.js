@@ -27,6 +27,143 @@ const districtSlug = window.location.pathname
   ?.replace(/\.html$/i, "")
   .toLowerCase();
 
+const siteHeader = document.querySelector(".atlas-page-header");
+if (siteHeader) {
+  siteHeader.className = "site-header";
+  const brand = siteHeader.querySelector(".atlas-page-brand");
+  if (brand) {
+    brand.className = "brand";
+    brand.href = "../index.html";
+  }
+
+  const headerNavigation = siteHeader.querySelector("nav");
+  const navigationLinks = headerNavigation?.querySelectorAll("a");
+  if (headerNavigation && navigationLinks?.length >= 3) {
+    navigationLinks[0].href = "../index.html#map";
+    navigationLinks[0].textContent = "Map";
+
+    const calendarLink = document.createElement("a");
+    calendarLink.href = "../index.html#calendar-app";
+    calendarLink.textContent = "Calendar";
+    headerNavigation.insertBefore(calendarLink, navigationLinks[1]);
+
+    navigationLinks[1].href = "../maps.html";
+    navigationLinks[1].textContent = "Districts & news";
+    navigationLinks[2].href = "#district-links";
+    navigationLinks[2].textContent = "Local news";
+  }
+
+  const searchForm = document.createElement("form");
+  searchForm.className = "place-finder header-place-finder";
+  searchForm.setAttribute("role", "search");
+  searchForm.autocomplete = "off";
+
+  const searchLabel = document.createElement("label");
+  searchLabel.className = "visually-hidden";
+  searchLabel.htmlFor = "place-search";
+  searchLabel.textContent = "Find a district";
+
+  const searchInput = document.createElement("input");
+  searchInput.id = "place-search";
+  searchInput.type = "search";
+  searchInput.placeholder = "Search a district";
+  searchInput.setAttribute("aria-controls", "place-search-results");
+  searchInput.setAttribute("aria-describedby", "place-search-help");
+
+  const searchHelp = document.createElement("p");
+  searchHelp.id = "place-search-help";
+  searchHelp.className = "visually-hidden";
+  searchHelp.textContent =
+    "Type a district name to open its news and information page.";
+
+  const searchResults = document.createElement("div");
+  searchResults.id = "place-search-results";
+  searchResults.className = "place-search-results";
+
+  const searchStatus = document.createElement("p");
+  searchStatus.id = "place-search-status";
+  searchStatus.className = "visually-hidden";
+  searchStatus.setAttribute("role", "status");
+  searchStatus.setAttribute("aria-live", "polite");
+
+  searchForm.append(
+    searchLabel,
+    searchInput,
+    searchHelp,
+    searchResults,
+    searchStatus,
+  );
+  siteHeader.insertBefore(searchForm, siteHeader.querySelector("nav"));
+
+  const districts = Object.entries(window.NEPAL_DISTRICT_DATA ?? {}).map(
+    ([slug, district]) => ({ slug, name: district.name }),
+  );
+
+  searchInput.addEventListener("input", () => {
+    const query = searchInput.value.trim().toLocaleLowerCase();
+    searchResults.replaceChildren();
+
+    if (!query) {
+      searchStatus.textContent = "";
+      return;
+    }
+
+    const matches = districts
+      .filter((district) => district.name.toLocaleLowerCase().includes(query))
+      .sort((first, second) => {
+        const firstStarts = first.name.toLocaleLowerCase().startsWith(query);
+        const secondStarts = second.name.toLocaleLowerCase().startsWith(query);
+        return (
+          Number(secondStarts) - Number(firstStarts) ||
+          first.name.localeCompare(second.name)
+        );
+      });
+
+    if (matches.length === 0) {
+      const emptyMessage = document.createElement("p");
+      emptyMessage.className = "place-search-empty";
+      emptyMessage.textContent = "No districts found. Try another name.";
+      searchResults.append(emptyMessage);
+      searchStatus.textContent = emptyMessage.textContent;
+      return;
+    }
+
+    const list = document.createElement("ul");
+    list.className = "place-search-list";
+
+    for (const district of matches.slice(0, 8)) {
+      const item = document.createElement("li");
+      const link = document.createElement("a");
+      link.href = `../District/${district.slug}.html`;
+
+      const name = document.createElement("span");
+      name.textContent = district.name;
+      link.append(name);
+
+      const detail = document.createElement("small");
+      detail.textContent = "District news and information";
+      link.append(detail);
+
+      item.append(link);
+      list.append(item);
+    }
+
+    searchResults.append(list);
+    searchStatus.textContent =
+      matches.length > 8
+        ? `Showing 8 of ${matches.length} matching districts. Keep typing to narrow your search.`
+        : `${matches.length} matching ${
+            matches.length === 1 ? "district" : "districts"
+          }.`;
+  });
+
+  searchForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const firstResult = searchResults.querySelector("a");
+    if (firstResult) window.location.href = firstResult.href;
+  });
+}
+
 if (page && heading && districtSlug) {
   const district = window.NEPAL_DISTRICT_DATA?.[districtSlug];
 
@@ -35,10 +172,6 @@ if (page && heading && districtSlug) {
   } else {
     page.className = "district-page";
     document.title = `${district.name} District | Hamro Nepal — District News & Local Links`;
-    document
-      .querySelector('.atlas-page-header nav a[href="#district-news-finder"]')
-      ?.setAttribute("href", "#district-links");
-
     const breadcrumb = document.createElement("a");
     breadcrumb.className = "district-breadcrumb";
     breadcrumb.href = "../maps.html";
