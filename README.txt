@@ -31,5 +31,3 @@ Explore Nepal through interactive provincial and district maps. Select any distr
 
 To make Nepal's geographical information, calendar system, and local news resources easily accessible through one simple and user-friendly platform.
 
-
-</p>
